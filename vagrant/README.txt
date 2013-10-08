@@ -1,0 +1,1 @@
+This is a simple folder for sharing files with Vagrant. It will be mounted at /vagrant.
