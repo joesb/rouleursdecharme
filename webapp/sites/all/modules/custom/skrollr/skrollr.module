@@ -1,0 +1,147 @@
+<?php
+/**
+ * @file skrollr.module
+ */
+
+/**
+ * Override or insert variables into the html templates.
+ */
+function skrollr_preprocess_html(&$vars) {
+  drupal_add_js(drupal_get_path('module', 'skrollr') . '/js/libraries/skrollr/dist/skrollr.min.js', array('type' => 'file', 'scope' => 'footer'));
+}
+
+
+/**
+ * Implementation of hook_page_build().
+ */
+// function skrollr_page_build(&$page) {
+//   $node = menu_get_object();
+//   if (!empty($node->nid)) {
+//     $skrollr_settings = array(
+//       'constants' => array(
+//         'box' => 150,
+//       ),
+//     );
+//     drupal_add_js(array('skrollr' => $skrollr_settings), 'setting');
+//   }
+// }
+
+/**
+ * Implements hook_field_info().
+ */
+function skrollr_field_info() {
+  return array(
+    'skrollr_settings' => array(
+      'label' => t('Skrollr constants'),
+      'description' => t('This field stores and renders email addresses.'),
+      'default_widget' => 'skrollr_settings',
+      'default_formatter' => 'skrollr_settings_default',
+      'property_type' => 'text',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function skrollr_field_is_empty($item, $field) {
+  if (empty($item['constant_name']) || empty($item['constant_value'])) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function skrollr_field_widget_info() {
+  return array(
+    'skrollr_settings' => array(
+      'label' => t('Text field'),
+      'field types' => array('skrollr_settings'),
+      // 'behaviors' => array(
+      //   'multiple values' => FIELD_BEHAVIOR_CUSTOM,
+      // ),
+      // 'settings' => array('constants' => array('box' => 150)),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function skrollr_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $base) {
+  $element = $base;
+  
+  // Prepare the list of options.
+  $element += array(
+    '#type' => 'fieldset',
+    '#tree' => TRUE,
+    '#title' => t('Skrollr constants'),
+    '#description' => t('Set a name/value pair for Skrollr constants'),
+  );
+  // $element['constants'] = array(
+  //   '#type' => 'fieldset',
+  //   '#title' => t('Skrollr constants'),
+  //   '#description' => t('Set a name/value pair for Skrollr constants'),
+  // );
+  $element['constant_name'] = array_merge($base, array(
+      '#title' => t('Contant name'),
+      '#description' => t('E.g. box'),
+      '#type' => 'textfield',
+      '#default_value' => isset($items[$delta]['constant_name']) ? $items[$delta]['constant_name'] : 'box',
+      '#prefix' => '<div class="text-full-wrapper">',
+      '#suffix' => '</div>',
+    )
+  );
+  $element['constant_value'] = array_merge($base, array(
+      '#title' => t('Contant value'),
+      '#description' => t('E.g. 150 would pause \'box\' for 150% of viewport'),
+      '#type' => 'textfield',
+      '#default_value' => isset($items[$delta]['constant_value']) ? $items[$delta]['constant_value'] : 150,
+      '#prefix' => '<div class="text-full-wrapper">',
+      '#suffix' => '</div>',
+      '#weight' => 1,
+    )
+  );
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ *
+ */
+function skrollr_field_formatter_info() {
+  $formats = array(
+    'skrollr_settings_default' => array(
+      'label' => t('Default skrollr settings'),
+      'description' => t('Add the skrollr settings to Drupal JavaScript settings.'),
+      'field types' => array('skrollr_settings'),
+    ),
+  );
+  return $formats;
+}
+
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function skrollr_field_formatter_view($object_type, $object, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  switch ($display['type']) {
+    case 'skrollr_settings_default':
+      foreach ($items as $delta => $item) {
+        // dpm($item);
+        $skrollr_settings = array(
+          'constants' => array(
+            $item['constant_name'] => (integer) $item['constant_value'],
+          ),
+        );
+        drupal_add_js(array('skrollr' => $skrollr_settings), 'setting');
+      }
+      break;
+  }
+  return $element;
+}
+

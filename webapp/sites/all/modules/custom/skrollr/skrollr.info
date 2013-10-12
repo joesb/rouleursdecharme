@@ -1,0 +1,7 @@
+name = Skrollr
+description = Support for Skrollr
+package = Custom
+core = 7.x
+; configure = admin/config/development/devel
+
+scripts[] = js/skrollr.js

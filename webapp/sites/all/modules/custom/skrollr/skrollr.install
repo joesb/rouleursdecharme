@@ -1,0 +1,32 @@
+<?php
+/**
+ * @file skrollr.install
+ */
+
+/**
+ * Implements hook_field_schema().
+ */
+function skrollr_field_schema() {
+  $columns = array();
+  $columns['constant_name'] = array(
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => FALSE,
+  );
+  $columns['constant_value'] = array(
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => FALSE,
+  );
+  // $columns['skrollr_keyframe'] = array(
+  //   'type' => 'varchar',
+  //   'length' => 255,
+  //   'not null' => FALSE,
+  // );
+  
+  $schema = array('columns' => $columns);
+  
+  return $schema;
+}
+
+
