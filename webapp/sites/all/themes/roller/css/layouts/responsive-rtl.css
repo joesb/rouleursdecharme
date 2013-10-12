@@ -6,7 +6,7 @@
 /**
  * Use 3 grid columns for smaller screens.
  */
-@media all and (min-width: 480px) and (max-width: 959px) {
+@media all and (min-width: $breakpoint_mini) and (max-width: $breakpoint_big - 1) {
 
   /**
    * The layout when there is only one sidebar, the right one.
@@ -123,7 +123,7 @@
 /**
  * Use 5 grid columns for larger screens.
  */
-@media all and (min-width: 960px) {
+@media all and (min-width: $breakpoint_big) {
 
   /**
    * The layout when there is only one sidebar, the right one.

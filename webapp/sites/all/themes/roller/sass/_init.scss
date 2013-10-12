@@ -79,15 +79,18 @@ $verdana:         Verdana, Tahoma, "DejaVu Sans", sans-serif;
 $tahoma:          Tahoma, Verdana, "DejaVu Sans", sans-serif;
 $helvetica:       Helvetica, Arial, "Nimbus Sans L", sans-serif;
 $arial:           Arial, Helvetica, "Nimbus Sans L", sans-serif;
-$arimo:          'Arimo', Helvetica, Arial, "Nimbus Sans L", sans-serif;
+$abel:            'Abel', Helvetica, Arial, "Nimbus Sans L", sans-serif;
+$roboto:          'Roboto', Helvetica, Arial, "Nimbus Sans L", sans-serif;
+$opensans:        'Open Sans Condensed', Helvetica, Arial, "Nimbus Sans L", sans-serif;
 
 // For an explanation of why "sans-serif" is at the end of this list, see
 // http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/
 $courier:         "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
 
 // Now create some variables for the font stacks we want to use on this site.
-$base-font-family: $arimo; // The font family set on the html element.
-$font-body:        $arimo;
+$base-font-family: $abel; // The font family set on the html element.
+$font-body:        $abel;
+$font-header:      $opensans;
 $font-monospace:   $courier;
 
 
@@ -96,12 +99,16 @@ $font-monospace:   $courier;
 //
 
 $blue: #0055A4;
+$blue_1: #004280;
 $white: #fff;
 $red: #EF4135;
-$black: #333;
+$black: #222;
+$grey: #999;
+$lightgrey: #ddd;
 
 // The amount lists, blockquotes and comments are indented.
 $indent-amount: 30px;
+$indent-amount-mini: 20px;
 
 // The height of the navigation container.
 $nav-height: 3em;

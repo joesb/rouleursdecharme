@@ -36,8 +36,8 @@ function roller_preprocess_maintenance_page(&$variables, $hook) {
  */
 /* -- Delete this line if you want to use this function */
 function roller_preprocess_html(&$variables, $hook) {
-  drupal_add_css('http://fonts.googleapis.com/css?family=Arimo:400,700,400italic', array('type' => 'external'));
-  $variables['sample_variable'] = t('Lorem ipsum.');
+  drupal_add_css('http://fonts.googleapis.com/css?family=Abel|Open+Sans+Condensed:300,700', array('type' => 'external'));
+  // $variables['sample_variable'] = t('Lorem ipsum.');
 
   // The body tag's classes are controlled by the $classes_array variable. To
   // remove a class from $classes_array, use array_diff().

@@ -14,10 +14,38 @@
 
 
 // To understand behaviors, see https://drupal.org/node/756722#behaviors
-Drupal.behaviors.my_custom_behavior = {
+Drupal.behaviors.navigation = {
   attach: function(context, settings) {
+    
+    var broken = $('body').hasClass('mini-header') ? true : false;
+    
+    $(window).scroll(function() {
+      var scrolltop = $(this).scrollTop();
+      var topBreak = 25;
+      var miniWidth = 480;
+      var w = $(window).width();
 
-    // Place your code here.
+      if (scrolltop >= topBreak && w > miniWidth) {
+        $('body').addClass('mini-header');
+        $('body').removeClass('normal-header');
+        window.broken = true;
+      }
+      else if (scrolltop <= (topBreak - 5) && w > miniWidth) {
+        $('body').removeClass('mini-header');
+        $('body').addClass('normal-header');
+        window.broken = false;
+      }
+      
+      $('a.header__logo').click(function(event) {
+        if (window.broken == true) {
+          event.preventDefault();
+          $('body').removeClass('mini-header');
+          window.broken = false;
+        }
+      });
+      
+    });  
+      
 
   }
 };

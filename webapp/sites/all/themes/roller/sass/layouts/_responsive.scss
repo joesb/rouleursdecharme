@@ -58,35 +58,128 @@ $zen-auto-include-item-base: false;
 }
 
 #header {
-  height: 100%;
-  background-color: $blue;
-  color: $white;
 }
 
 /* Navigation bar */
-@media all and (min-width: 480px) {
-  $zen-column-count: 5;
+@media all and (min-width: $breakpoint_mini) {
   #header {
-    @include zen-grid-item(1, 1);
+    height: 100%;
     position: fixed;
-    
+    z-index: 998;
   }
   #main {
     /* Move all the children of #main down to make room. */
     padding-top: $nav-height;
     position: relative;
-    @include zen-grid-item(4, 2);
   }
   #navigation {
     /* Move the navbar up inside #main's padding. */
-    position: absolute;
-    top: 0;
-    height: $nav-height;
-    width: $zen-grid-width;
+/*    position: absolute;
+    top: 0;*/
+/*    height: $nav-height;
+    width: $zen-grid-width;*/
+  }
+  body.mini-header {
+    #navigation {
+      display: none;
+    }
   }
   #footer {
     @include zen-clear();
+  }
+}
+@media all and (min-width: $breakpoint_big + 1) {
+  $zen-column-count: 5;
+  #header {
+    @include zen-grid-item(1, 1);
+  }
+  #main {
     @include zen-grid-item(4, 2);
+  }
+  #footer {
+    @include zen-grid-item(4, 2);
+  }
+  body.mini-header{
+    #header {
+      width: 60px;
+      margin-right: -60px;
+    }
+    #main {
+      width: 100%;
+      margin: 0;
+    }
+    #main-inner {
+      margin-left: 60px;
+    }
+  }
+}
+
+@media all and (min-width: $breakpoint_medium + 1) and (max-width: $breakpoint_big)  {
+  $zen-column-count: 4;
+  #header {
+    @include zen-grid-item(1, 1);
+  }
+  #main {
+    @include zen-grid-item(3, 2);
+  }
+  #footer {
+    @include zen-grid-item(3, 2);
+  }
+  body.mini-header {
+    #header {
+      width: 60px;
+      margin-right: -60px;
+    }
+    #main {
+      width: 100%;
+      margin: 0;
+    }
+    #main-inner {
+      margin-left: 60px;
+    }
+  }
+}
+
+@media all and (min-width: $breakpoint_mini + 1) and (max-width: $breakpoint_medium) {
+  $zen-column-count: 7;
+  #header {
+    @include zen-grid-item(2, 1);
+  }
+  #main {
+    @include zen-grid-item(5, 3);
+  }
+  #footer {
+    @include zen-grid-item(5, 3);
+  }
+  body.mini-header {
+    #header {
+      width: 60px;
+      margin-right: -60px;
+    }
+    #main {
+      width: 100%;
+      margin: 0;
+    }
+    #main-inner {
+      margin-left: 60px;
+    }
+  }
+}
+
+@media all and (max-width: $breakpoint_mini) {
+  #header {
+    width: 100%;
+    position: fixed;
+    z-index: 998;
+  }
+  #main {
+    /* Move all the children of #main down to make room. */
+    margin-top: 100px;
+    padding-top: $nav-height;
+    position: relative;
+  }
+  #footer {
+    @include zen-clear();
   }
 }
 
@@ -95,7 +188,7 @@ $zen-auto-include-item-base: false;
 /**
  * Use 3 grid columns for smaller screens.
  */
-@media all and (min-width: 480px) and (max-width: 959px) {
+@media all and (min-width: $breakpoint_mini) and (max-width: $breakpoint_big - 1) {
 
   $zen-column-count: 3;
 
@@ -173,7 +266,7 @@ $zen-auto-include-item-base: false;
 /**
  * Use 5 grid columns for larger screens.
  */
-@media all and (min-width: 960px) {
+@media all and (min-width: $breakpoint_big) {
 
   $zen-column-count: 5;
 

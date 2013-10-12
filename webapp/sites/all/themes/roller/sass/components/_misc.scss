@@ -79,14 +79,18 @@
 
 /* Wrapping link for logo. */
 .header__logo {
-  float: left; /* LTR */
-  margin: 0;
+/*  float: left; */ /* LTR */
   padding: 0;
 }
 
 /* Logo image. */
 .header__logo-image {
+  background-repeat: no-repeat;
+  background-size: 100% auto;
   vertical-align: bottom;
+  display: block;
+/*  height: auto;*/
+/*  max-height: 91px;*/
 }
 
 /* Wrapper for website name and slogan. */
@@ -152,13 +156,28 @@
     margin: 0;
     padding: 0;
     text-align: left; /* LTR */
+    font-family: $font-header;
 
     li {
       /* A simple method to get navigation links to appear in one line. */
-      float: left; /* LTR */
-      padding: 0 10px 0 0; /* LTR */
       list-style-type: none;
       list-style-image: none;
+      padding: $indent-amount/6 0;
+      border-bottom: 1px solid $blue_1;
+      
+      a {
+        color: $white;
+        text-decoration: none;
+        text-transform: uppercase;
+        margin-left: 26px;
+        display: block;
+      }
+      &.last {
+        border-bottom: 0;
+      }
+    }
+    li.active {
+      background: url(../images/cog.png) left center no-repeat;
     }
   }
 }
@@ -803,5 +822,37 @@ tr.selected td {
   .filled {
     background-color: #0072b9;
     background-image: image-url("progress.gif");
+  }
+}
+
+@media all and (min-width: $breakpoint_medium + 1) {
+  .header__logo-image {
+    background-image: url(../logo.png);
+    max-width: 202px;
+    height: 91px;
+    margin: $indent-amount auto;
+  }
+}
+@media all and (max-width: $breakpoint_medium ) {
+  .header__logo-image {
+    background-image: url(../logo-mini.png);
+    max-width: 80px;
+    height: 80px;
+    margin: $indent-amount-mini/2 auto;
+  }
+}
+@media all and (min-width: $breakpoint_mini + 1) {
+  body.mini-header .header__logo-image {
+    background-image: url(../logo-mini.png);
+    max-width: 40px;
+    height: 40px;
+  }
+}
+
+@media all and (max-width: $breakpoint_mini ) {
+  .header__logo-image {
+    max-width: 40px;
+    height: 40px;
+    margin: $indent-amount-mini/2 0 $indent-amount-mini/2 $indent-amount-mini/2;
   }
 }
